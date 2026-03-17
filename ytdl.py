@@ -34,6 +34,9 @@ def build_args(url: str, cfg: dict, quality: str | None, audio_only: bool) -> li
         "-o", f"{out_dir}/%(title)s.%(ext)s",
     ]
 
+    if not audio_only:
+        args.insert(1, "--no-config")
+
     if audio_only:
         args += ["-x", "--audio-format", "mp3"]
         if cfg["defaults"]["embed_thumbnail"]:
