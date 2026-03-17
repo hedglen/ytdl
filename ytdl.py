@@ -30,6 +30,7 @@ def build_args(url: str, cfg: dict, quality: str | None, audio_only: bool) -> li
         "--no-mtime",
         "--no-playlist",
         "--cookies-from-browser", f"firefox:{floorp_profile}",
+        "--extractor-args", "youtube:player_client=ios,web",
         "-o", f"{out_dir}/%(title)s.%(ext)s",
     ]
 
