@@ -24,7 +24,14 @@ def build_args(url: str, cfg: dict, quality: str | None, audio_only: bool) -> li
     fmt = cfg["defaults"]["format"]
     q = quality or cfg["defaults"]["quality"]
 
-    args = ["yt-dlp", "--no-mtime", "-o", f"{out_dir}/%(title)s.%(ext)s"]
+    floorp_profile = Path.home() / "AppData/Roaming/Floorp/Profiles/utgll9ra.default-release"
+    args = [
+        "yt-dlp",
+        "--no-mtime",
+        "--no-playlist",
+        "--cookies-from-browser", f"firefox:{floorp_profile}",
+        "-o", f"{out_dir}/%(title)s.%(ext)s",
+    ]
 
     if audio_only:
         args += ["-x", "--audio-format", "mp3"]
@@ -50,9 +57,10 @@ def build_args(url: str, cfg: dict, quality: str | None, audio_only: bool) -> li
 def main():
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help"):
         console.print(Panel(
-            "[bold]ytdl[/bold] [cyan]<url>[/cyan] [dim][[--audio] [--quality 1080|720|480|best]][/dim]\n\n"
+            "[bold]ytdl[/bold] [cyan]<url>[/cyan] [dim][[--audio] [--quality 1080|720|480|best] [--playlist]][/dim]\n\n"
             "  [cyan]--audio[/cyan]       Download audio only (mp3)\n"
-            "  [cyan]--quality[/cyan]     Video quality: best (default), 1080, 720, 480\n\n"
+            "  [cyan]--quality[/cyan]     Video quality: best (default), 1080, 720, 480\n"
+            "  [cyan]--playlist[/cyan]    Download full playlist (single video by default)\n\n"
             "Downloads go to [yellow]D:/media/Downloads[/yellow]",
             title="yt-dlp wrapper",
             border_style="blue"
@@ -61,6 +69,8 @@ def main():
 
     args = sys.argv[1:]
     audio_only = "--audio" in args
+    playlist = "--playlist" in args
+    args = [a for a in args if a != "--playlist"]
     quality = None
 
     if "--quality" in args:
@@ -75,6 +85,8 @@ def main():
 
     cfg = load_config()
     cmd = build_args(url, cfg, quality, audio_only)
+    if playlist:
+        cmd = [c for c in cmd if c != "--no-playlist"]
 
     mode = "audio (mp3)" if audio_only else f"video ({quality or cfg['defaults']['quality']})"
     console.print(f"[bold blue]↓[/bold blue] Downloading [cyan]{mode}[/cyan]")
