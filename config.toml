@@ -1,0 +1,12 @@
+[paths]
+download_dir = "D:/media/Downloads"
+
+[defaults]
+# best, audio, 1080, 720, 480
+quality = "best"
+# mp4, mkv, webm (video) | mp3, m4a, opus (audio)
+format = "mp4"
+# embed subtitles if available
+subtitles = false
+# embed thumbnail into audio files
+embed_thumbnail = true
