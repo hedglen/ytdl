@@ -25,14 +25,16 @@ def build_args(url: str, cfg: dict, quality: str | None, audio_only: bool) -> li
     q = quality or cfg["defaults"]["quality"]
 
     floorp_profile = Path.home() / "AppData/Roaming/Floorp/Profiles/utgll9ra.default-release"
+    node_exe = Path("C:/Program Files/nodejs/node.exe")
     args = [
         "yt-dlp",
         "--no-mtime",
         "--no-playlist",
         "--cookies-from-browser", f"firefox:{floorp_profile}",
-        "--extractor-args", "youtube:player_client=ios,web",
         "-o", f"{out_dir}/%(title)s.%(ext)s",
     ]
+    if node_exe.exists():
+        args += ["--js-runtimes", f"node:{node_exe}"]
 
     if audio_only:
         args += ["-x", "--audio-format", "mp3"]
