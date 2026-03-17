@@ -33,8 +33,7 @@ def build_args(url: str, cfg: dict, quality: str | None, audio_only: bool) -> li
         "--cookies-from-browser", f"firefox:{floorp_profile}",
         "-o", f"{out_dir}/%(title)s.%(ext)s",
     ]
-    if node_exe.exists():
-        args += ["--js-runtimes", f"node:{node_exe}"]
+    args += ["--extractor-args", "youtube:player_client=android,web"]
 
     if audio_only:
         args += ["-x", "--audio-format", "mp3"]
