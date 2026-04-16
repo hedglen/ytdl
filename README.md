@@ -91,5 +91,5 @@ The `ytdl` alias is registered in the PowerShell profile via dotfiles.
 | Loom | `loom` | Screen recordings |
 | Streamable | `Streamable` | Short video clip hosting |
 
-## Other Sites As Well - Try it out
+### Other Sites As Well - Try it out
 
