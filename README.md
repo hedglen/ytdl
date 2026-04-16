@@ -91,19 +91,5 @@ The `ytdl` alias is registered in the PowerShell profile via dotfiles.
 | Loom | `loom` | Screen recordings |
 | Streamable | `Streamable` | Short video clip hosting |
 
-## Supported Sites — Adult
+## Other Sites As Well - Try it out
 
-Top working extractors (as of `dll` check):
-
-| Site | Extractor |
-|------|-----------|
-| PornHub | `PornHub`, `PornHubPlaylist`, `PornHubUser` |
-| XVideos | `XVideos`, `xvideos:quickies` |
-| XHamster | `XHamster`, `XHamsterUser` |
-| RedTube | `RedTube` |
-| YouPorn | `YouPorn`, `YouPornCategory`, `YouPornChannel`, `YouPornCollection` |
-| SpankBang | `SpankBang`, `SpankBangPlaylist` |
-| Eporner | `Eporner` |
-| TNAFlix | `TNAFlix` |
-| RedGifs | `RedGifs`, `RedGifsSearch`, `RedGifsUser` |
-| Motherless | `Motherless`, `MotherlessGallery`, `MotherlessGroup` |
